@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MyLib;
+using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
-using MyLib;
 
 namespace Program_2
 {
-    class Program
+    internal class Program2
     {
         // Path to file.
-        private const string Path = @"..\..\..\out.txt";
+        private const string Path = @"..\..\..\out.ser";
 
         /// <summary>
         /// Deserialize objects.
         /// </summary>
-        private static void DeserializeObjects()
+        private static void DeserializeStreets()
         {
             Street[] streetArray;
 
@@ -54,7 +51,7 @@ namespace Program_2
             // Attempt to deserialize.
             try
             {
-                DeserializeObjects();
+                DeserializeStreets();
             }
             catch (SerializationException)
             {
@@ -94,6 +91,4 @@ namespace Program_2
             while (Console.ReadKey().Key != ConsoleKey.Escape) ;
         }
     }
-
 }
-

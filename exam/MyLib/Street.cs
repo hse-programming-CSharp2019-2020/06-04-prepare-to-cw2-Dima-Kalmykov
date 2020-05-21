@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyLib
 {
@@ -11,16 +8,21 @@ namespace MyLib
     {
         public Street() { }
 
+        public string Name { get; set; }
+        public int[] Houses { get; set; }
 
-        public string name;
-        public int[] houses;
-
+        // Constructor.
         public Street(string name, int[] houses)
         {
-            this.name = name;
-            this.houses = houses;
+            Name = name;
+            Houses = houses;
         }
 
+        /// <summary>
+        /// Overloading operator ~.
+        /// </summary>
+        /// <param name="street"> Street </param>
+        /// <returns> Amount of houses </returns>
         public static int operator ~(Street street)
         {
             if (street is null)
@@ -28,20 +30,32 @@ namespace MyLib
                 throw new ArgumentNullException();
             }
 
-            return street.houses.Length;
+            return street.Houses.Length;
         }
 
-        public static bool operator !(Street street) => street.houses.Any(IsContain7);
+        /// <summary>
+        /// Overloading operator !.
+        /// </summary>
+        /// <param name="street"> Street </param>
+        /// <returns> True, if any houses number contain 7,
+        /// else - false </returns>
+        public static bool operator !(Street street) => street.Houses.Any(IsContain7);
 
         public override string ToString() =>
-            houses.Aggregate(name + " ", (current, next) => current + " " + next);
+            Houses.Aggregate(Name + " ", (current, next) => current + " " + next);
 
-        private static bool IsContain7(int number)
+        /// <summary>
+        /// Check house number for digit 7.
+        /// </summary>
+        /// <param name="houseNumber"> House number </param>
+        /// <returns> True, if house number contains 7,
+        /// else - false </returns> 
+        private static bool IsContain7(int houseNumber)
         {
-            while (number > 0)
+            while (houseNumber > 0)
             {
-                var lastDigit = number % 10;
-                number /= 10;
+                var lastDigit = houseNumber % 10;
+                houseNumber /= 10;
 
                 if (lastDigit % 10 == 7)
                 {
